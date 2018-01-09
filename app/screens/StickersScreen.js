@@ -15,6 +15,7 @@ import {
 import Expo from 'expo';
 
 import StickerList from '../components/StickerList';
+import Sticker from '../components/Sticker';
 
 import { uuid } from '../helpers/utils';
 import firebase from '../helpers/firebase';
@@ -72,10 +73,10 @@ class FeedScreen extends React.Component {
 
         for (let i = 0; i < this.state.stickers.length; i++) {
             stickerViews.push(
-                <Image
-                    style={{width: 150, height: 150, position: 'absolute', }}
-                    source={this.state.stickers[i].image.path }
-                    resizeMode="contain"
+                <Sticker
+                    style={{ left: 0, top: 0, position: 'absolute', }}
+                    id={`${i}`}
+                    source={this.state.stickers[i].image.path}
                 />
             )
         }
