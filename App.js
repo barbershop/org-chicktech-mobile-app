@@ -1,7 +1,7 @@
 import React from 'react';
-import FeedScreen from './screens/FeedScreen';
-import CameraScreen from './screens/CameraScreen';
-import StickersScreen from './screens/StickersScreen';
+import FeedScreen from './app/screens/FeedScreen';
+import CameraScreen from './app/screens/CameraScreen';
+import StickersScreen from './app/screens/StickersScreen';
 import {
   StackNavigator,
 } from 'react-navigation';
