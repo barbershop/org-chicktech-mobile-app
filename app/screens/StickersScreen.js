@@ -49,10 +49,15 @@ class FeedScreen extends React.Component {
         const { params = {} } = navigation.state
 
         return {
-            title: 'STICKERS',
-            headerTintColor: '#fff',
-            headerStyle: { backgroundColor: '#FC508B' },
-            headerTitleStyle: { color: '#fff' },
+            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>STICKERS</Text>,
+            headerLeft: <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginLeft: 5 }} onPress={() => params.handleBack()}>
+                <Image
+                    style={{ flex: 1 }}
+                    resizeMode='contain'
+                    source={require('../../assets/back-button.png')}
+                />
+            </TouchableOpacity>,
+            headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
         }
     }
 
@@ -62,7 +67,7 @@ class FeedScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({ handleClose: this._handleCloseButtonPress })
+        this.props.navigation.setParams({ handleBack: this._handleBackButtonPress })
     }
 
     render() {
@@ -109,8 +114,8 @@ class FeedScreen extends React.Component {
         this.setState({ stickers: [...stickers, stickerData[id]] });
     }
 
-    _handleCloseButtonPress = () => {
-        console.log('CLOSE');
+    _handleBackButtonPress = () => {
+        this.props.navigation.goBack();
     }
 
     _handleSave = async () => {
@@ -210,7 +215,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.2)'
     },
     saveButtonText: {
-        color: '#fff'
+        color: '#fff',
+        fontFamily: 'Avenir',
+        fontWeight: '900',
+        fontStyle: 'italic',
+        fontSize: 20
     }
 });
 

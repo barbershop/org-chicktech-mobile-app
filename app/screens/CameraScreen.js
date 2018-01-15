@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Button, Dimensions, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Dimensions, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
 var screenWidth = Dimensions.get('window').width; 
@@ -10,11 +10,15 @@ export default class CameraScreen extends React.Component {
         const { params = {} } = navigation.state
 
         return {
-            title: 'CAMERA',
-            headerTintColor: '#fff',
-            headerStyle: { backgroundColor: '#FC508B' },
-            headerTitleStyle: { color: '#fff' },
-            headerRight: <Button color="#fff" title="Close" onPress={() => params.handleCloseCamera()} />,
+            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>CAMERA</Text>,
+            headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
+            headerRight: <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.handleCloseCamera()}>
+                <Image
+                    style={{ flex: 1 }}
+                    resizeMode='contain'
+                    source={require('../../assets/close-button.png')}
+                />
+            </TouchableOpacity>,
         }
     }
 

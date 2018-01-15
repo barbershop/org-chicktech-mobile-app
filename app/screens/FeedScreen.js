@@ -4,6 +4,8 @@ import {
     View,
     Button,
     Modal,
+    TouchableOpacity,
+    Image,
     StyleSheet
 } from 'react-native';
 import FeedList from '../components/FeedList';
@@ -16,11 +18,15 @@ export default class FeedScreen extends React.Component {
         const { params = {} } = navigation.state
 
         return {
-            title: 'FEED',
-            headerRight: <Button color="#fff" title="Camera" onPress={() => params.handleCamera()} />,
-            headerTintColor: '#fff',
-            headerStyle: { backgroundColor: '#FC508B' },
-            headerTitleStyle: { color: '#fff' },
+            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>FEED</Text>,
+            headerRight: <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.handleCamera()}>
+                        <Image
+                            style={{ flex: 1 }}
+                            resizeMode='contain'
+                            source={require('../../assets/camera-button.png')}
+                        />
+            </TouchableOpacity>,
+            headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 }
         }
     }
 
@@ -39,7 +45,9 @@ export default class FeedScreen extends React.Component {
         return (
             <View style={{flex: 1}}>
                 <FeedList style={styles.feedList} data={this.state.feedData} />
-                <Modal visible={this.state.cameraModalVisible}>
+                <Modal
+                    visible={this.state.cameraModalVisible}
+                    animationType={'slide'}>
                     <CameraStackNavigator style={{ flex: 1 }} screenProps={{
                         onClose: this._handleModalClose
                     }} />
