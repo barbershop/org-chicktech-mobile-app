@@ -3,13 +3,11 @@ import {
     Text,
     View,
     Button,
+    Modal,
     StyleSheet
 } from 'react-native';
 import FeedList from '../components/FeedList';
-
-import {
-    StackNavigator,
-} from 'react-navigation';
+import CameraStackNavigator from '../navigation/CameraStackNavigator';
 
 import firebase from '../helpers/firebase';
 
@@ -27,7 +25,8 @@ export default class FeedScreen extends React.Component {
     }
 
     state = {
-        feedData: []
+        feedData: [],
+        cameraModalVisible: false
     }
 
     componentDidMount() {
@@ -38,12 +37,23 @@ export default class FeedScreen extends React.Component {
     render() {
         console.log(`FEED DATA: ${this.state.feedData}`)
         return (
-            <FeedList style={styles.feedList} data={this.state.feedData} />
+            <View style={{flex: 1}}>
+                <FeedList style={styles.feedList} data={this.state.feedData} />
+                <Modal visible={this.state.cameraModalVisible}>
+                    <CameraStackNavigator style={{ flex: 1 }} screenProps={{
+                        onClose: this._handleModalClose
+                    }} />
+                </Modal>
+            </View>
         )
     }
 
     _handleCameraButtonPress = () => {
-        this.props.navigation.navigate('CameraScreen');
+        this.setState({ cameraModalVisible: true });
+    }
+
+    _handleModalClose = () => {
+        this.setState({ cameraModalVisible: false });
     }
 
     _setupMediaListener() {
@@ -59,11 +69,13 @@ export default class FeedScreen extends React.Component {
             };
 
             console.log("FIREBASE MEDIA: ", mappedMedia);
-            this.setState({ feedData: mappedMedia });
+            this.setState({ feedData: mappedMedia.reverse() });
         });
     }
 }
 
 const styles = StyleSheet.create({
-
+    feedList: {
+        flex: 1
+    }
 });

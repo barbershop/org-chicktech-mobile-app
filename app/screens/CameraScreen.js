@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Dimensions, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, Button, Dimensions, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
 var screenWidth = Dimensions.get('window').width; 
@@ -14,6 +14,7 @@ export default class CameraScreen extends React.Component {
             headerTintColor: '#fff',
             headerStyle: { backgroundColor: '#FC508B' },
             headerTitleStyle: { color: '#fff' },
+            headerRight: <Button color="#fff" title="Close" onPress={() => params.handleCloseCamera()} />,
         }
     }
 
@@ -23,6 +24,7 @@ export default class CameraScreen extends React.Component {
     }
 
     async componentWillMount() {
+        this.props.navigation.setParams({ handleCloseCamera: this._handleCloseCamera });
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
     }
@@ -41,32 +43,7 @@ export default class CameraScreen extends React.Component {
                     </View>
                     <View style={styles.cameraBottom}>
                         <View style={styles.cameraButtonContainer}>
-                            <TouchableOpacity style={styles.cameraButton} onPress={() => { this.takePicture() }} />
-                            {/* <View
-                                        style={{
-                                            flex: 1,
-                                            backgroundColor: 'transparent',
-                                            flexDirection: 'row',
-                                        }}>
-                                        <TouchableOpacity
-                                            style={{
-                                                flex: 0.1,
-                                                alignSelf: 'flex-end',
-                                                alignItems: 'center',
-                                            }}
-                                            onPress={() => {
-                                                this.setState({
-                                                    type: this.state.type === Camera.Constants.Type.back
-                                                        ? Camera.Constants.Type.front
-                                                        : Camera.Constants.Type.back,
-                                                });
-                                            }}>
-                                            <Text
-                                                style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                                                {' '}Flip{' '}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    </View> */}
+                            <TouchableOpacity style={styles.cameraButton} onPress={() => { this._takePicture() }} />
                         </View>
                     </View>
                 </View>
@@ -74,13 +51,17 @@ export default class CameraScreen extends React.Component {
         }
     }
 
-    takePicture = async () => {
+    _takePicture = async () => {
         console.log('TAKE PICTURE')
         if (this.camera) {
             let photo = await this.camera.takePictureAsync();
             this.props.navigation.navigate('StickersScreen', { photo: photo });
         }
     };
+
+    _handleCloseCamera = () => {
+        this.props.screenProps.onClose();
+    }
 }
 
 const styles = StyleSheet.create({

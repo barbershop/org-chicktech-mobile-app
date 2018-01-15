@@ -19,6 +19,7 @@ export default class FeedList extends React.PureComponent {
     _renderItem = ({ item }) => (
         <FeedListItem
             id={item.id}
+            key={item.id}
             onPressItem={this._onPressItem}
             selected={!!this.state.selected.get(item.id)}
             image={item.image}

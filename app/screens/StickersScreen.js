@@ -160,6 +160,7 @@ class FeedScreen extends React.Component {
             });
 
             this.setState({ isSaving: false });
+            this.props.screenProps.onClose();
         } catch (error) {
             this.setState({ isSaving: false });
             console.error(error);
