@@ -23,7 +23,7 @@ export default class FeedScreen extends React.Component {
                         <Image
                             style={{ flex: 1 }}
                             resizeMode='contain'
-                            source={require('../assets/camera-button.png')}
+                            source={require('../assets/buttons/camera-button.png')}
                         />
             </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 }
@@ -41,10 +41,9 @@ export default class FeedScreen extends React.Component {
     }
 
     render() {
-        console.log(`FEED DATA: ${this.state.feedData}`)
         return (
             <View style={{flex: 1}}>
-                <FeedList style={styles.feedList} data={this.state.feedData} />
+                <FeedList style={{flex: 1}} data={this.state.feedData} />
                 <Modal
                     visible={this.state.cameraModalVisible}
                     animationType={'slide'}>
@@ -81,9 +80,3 @@ export default class FeedScreen extends React.Component {
         });
     }
 }
-
-const styles = StyleSheet.create({
-    feedList: {
-        flex: 1
-    }
-});

@@ -5,6 +5,7 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
+    CameraRoll,
     StyleSheet
 } from 'react-native';
 
@@ -19,7 +20,7 @@ import Sticker from '../components/Sticker';
 
 import { uuid } from '../../helpers/utils';
 import firebase from '../../helpers/firebase';
-import stickerData from '../assets/stickers'
+import stickerData from '../assets/stickers';
 
 var screenWidth = Dimensions.get('window').width;
 var screenHeight = Dimensions.get('window').height;
@@ -34,7 +35,7 @@ class FeedScreen extends React.Component {
                 <Image
                     style={{ flex: 1 }}
                     resizeMode='contain'
-                    source={require('../assets/back-button.png')}
+                    source={require('../assets/buttons/back-button.png')}
                 />
             </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
@@ -60,6 +61,7 @@ class FeedScreen extends React.Component {
             stickerViews.push(
                 <Sticker
                     id={`${i}`}
+                    key={`${i}`}
                     source={this.state.stickers[i].image.path}
                     zIndex={this.state.stickers[i].zIndex}
                     onTap={() => this._onTapSticker(`${i}`)}
@@ -71,7 +73,7 @@ class FeedScreen extends React.Component {
             <View style={styles.container}>
                 <View style={styles.stickersTop} ref="photoContainer">
                     <Image
-                        style={styles.photo}
+                        style={{flex: 1}}
                         source={{ uri: state.params.photo.uri }}
                     />
                     <View style={styles.stickersContainer}>
@@ -80,7 +82,7 @@ class FeedScreen extends React.Component {
                 </View>
                 <View style={styles.stickersBottom}>
                     <View style={styles.stickerListContainer}>
-                        <StickerList style={styles.stickerList} data={stickerData} onPressStickerListItem={this._handleStickerListItemPress.bind(this)} />
+                        <StickerList style={{flex: 1}} data={stickerData} onPressStickerListItem={this._handleStickerListItemPress.bind(this)} />
                     </View>
                     <TouchableOpacity style={[styles.saveButton, this.state.isSaving && styles.saveButtonSaving]} onPress={this._handleSave} disabled={this.state.isSaving}>
                         <Text style={styles.saveButtonText}>{this.state.isSaving ? 'SAVING...' : 'SAVE' }</Text>
@@ -119,6 +121,7 @@ class FeedScreen extends React.Component {
 
         try {
             let result = await Expo.takeSnapshotAsync(this.refs.photoContainer, { format: 'jpg', result: 'file', quality: 1.0 });
+            let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
             body.append("picture", {
                 uri: result,
                 name,
@@ -184,16 +187,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC508B',
         flex: 1
     },
-    photo: {
-        flex: 1
-    },
     stickerListContainer: {
         backgroundColor: '#000',
         height: 104,
         width: screenWidth
-    },
-    stickerList: {
-        flex: 1,
     },
     saveButton: {
         backgroundColor: 'transparent',
