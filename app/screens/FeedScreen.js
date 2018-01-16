@@ -42,7 +42,7 @@ export default class FeedScreen extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, backgroundColor: '#000'}}>
                 <FeedList style={{flex: 1}} data={this.state.feedData} />
                 <Modal
                     visible={this.state.cameraModalVisible}
@@ -74,7 +74,7 @@ export default class FeedScreen extends React.Component {
                 item.id = key;
                 mappedMedia.push(item);
             };
-            
+
             this.setState({ feedData: mappedMedia.reverse() });
         });
     }
