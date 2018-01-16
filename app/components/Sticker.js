@@ -5,7 +5,6 @@ import {
     PanGestureHandler,
     PinchGestureHandler,
     RotationGestureHandler,
-    TapGestureHandler,
     ScrollView,
     State,
 } from 'react-native-gesture-handler';
@@ -78,55 +77,43 @@ export class Sticker extends React.Component {
             this._pinchScale.setValue(1);
         }
     };
-    _onTapHandlerStateChange = ({ nativeEvent }) => {
-        if (nativeEvent.oldState === State.ACTIVE) {
-            // Once tap happened we set the position of the circle under the tapped spot
-            this.props.onTap()
-        }
-    };
 
     render() {
         return (
-            <TapGestureHandler
-                onHandlerStateChange={this._onTapHandlerStateChange}
-                numberOfTaps={1}
-                waitFor={`image_drag_${this.props.id}`}
-                id={`image_tap_${this.props.id}`}>
-                <PanGestureHandler
-                    onGestureEvent={this._onDragGestureEvent}
-                    onHandlerStateChange={this._onDragHandlerStateChange}
-                    id={`image_drag_${this.props.id}`}>
-                    <RotationGestureHandler
-                        id={`image_rotation_${this.props.id}`}
-                        simultaneousHandlers={`image_pinch_${this.props.id}`}
-                        onGestureEvent={this._onRotateGestureEvent}
-                        onHandlerStateChange={this._onRotateHandlerStateChange}>
-                        <PinchGestureHandler
-                            id={`image_pinch_${this.props.id}`}
-                            simultaneousHandlers={`image_rotation_${this.props.id}`}
-                            onGestureEvent={this._onPinchGestureEvent}
-                            onHandlerStateChange={this._onPinchHandlerStateChange}>
-                            <Animated.Image
-                                style={[
-                                    styles.pinchableImage,
-                                    {
-                                        transform: [
-                                            { perspective: 200 },
-                                            { scale: this._scale },
-                                            { rotate: this._rotateStr },
-                                            { translateX: this._translateX },
-                                            { translateY: this._translateY },
-                                        ],
-                                        zIndex: this.props.zIndex
-                                    },
-                                ]}
-                                source={this.props.source}
-                                resizeMode="contain"
-                            />
-                        </PinchGestureHandler>
-                    </RotationGestureHandler>
-                </PanGestureHandler>
-            </TapGestureHandler>
+            <PanGestureHandler
+                onGestureEvent={this._onDragGestureEvent}
+                onHandlerStateChange={this._onDragHandlerStateChange}
+                id={`image_drag_${this.props.id}`}>
+                <RotationGestureHandler
+                    id={`image_rotation_${this.props.id}`}
+                    simultaneousHandlers={`image_pinch_${this.props.id}`}
+                    onGestureEvent={this._onRotateGestureEvent}
+                    onHandlerStateChange={this._onRotateHandlerStateChange}>
+                    <PinchGestureHandler
+                        id={`image_pinch_${this.props.id}`}
+                        simultaneousHandlers={`image_rotation_${this.props.id}`}
+                        onGestureEvent={this._onPinchGestureEvent}
+                        onHandlerStateChange={this._onPinchHandlerStateChange}>
+                        <Animated.Image
+                            style={[
+                                styles.pinchableImage,
+                                {
+                                    transform: [
+                                        { perspective: 200 },
+                                        { scale: this._scale },
+                                        { rotate: this._rotateStr },
+                                        { translateX: this._translateX },
+                                        { translateY: this._translateY },
+                                    ],
+                                    zIndex: this.props.zIndex
+                                },
+                            ]}
+                            source={this.props.source}
+                            resizeMode="contain"
+                        />
+                    </PinchGestureHandler>
+                </RotationGestureHandler>
+            </PanGestureHandler>
         );
     }
 }

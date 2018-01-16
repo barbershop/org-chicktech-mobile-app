@@ -28,7 +28,6 @@ export default class FeedList extends React.PureComponent {
     );
 
     render() {
-        console.log(`RENDER FEED LIST: ${this.props.data.length}`);
         return (
             <FlatList
                 data={this.props.data}
@@ -36,12 +35,7 @@ export default class FeedList extends React.PureComponent {
                 keyExtractor={this._keyExtractor}
                 renderItem={this._renderItem}
                 ItemSeparatorComponent={() => <View style={{ width: '100%', height: 3, backgroundColor: '#000' }}/> }
-                style={styles.list}
             />
         );
     }
 }
-
-const styles = StyleSheet.create({
-
-});

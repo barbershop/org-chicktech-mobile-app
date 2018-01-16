@@ -22,22 +22,32 @@ import { uuid } from '../../helpers/utils';
 import firebase from '../../helpers/firebase';
 import stickerData from '../assets/stickers';
 
-var screenWidth = Dimensions.get('window').width;
-var screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 class FeedScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state
 
         return {
-            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>STICKERS</Text>,
-            headerLeft: <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginLeft: 5 }} onPress={() => params.handleBack()}>
-                <Image
-                    style={{ flex: 1 }}
-                    resizeMode='contain'
-                    source={require('../assets/buttons/back-button.png')}
-                />
-            </TouchableOpacity>,
+            headerTitle:
+                <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>STICKERS</Text>,
+            headerLeft:
+                <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginLeft: 5 }} onPress={() => params.onPressBackButton()}>
+                    <Image
+                        style={{ flex: 1 }}
+                        resizeMode='contain'
+                        source={require('../assets/buttons/back-button.png')}
+                    />
+                </TouchableOpacity>,
+            headerRight:
+                <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.onPressUndoButton()}>
+                    <Image
+                        style={{ flex: 1 }}
+                        resizeMode='contain'
+                        source={require('../assets/buttons/undo-button.png')}
+                    />
+                </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
         }
     }
@@ -48,14 +58,14 @@ class FeedScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({ handleBack: this._handleBackButtonPress })
+        this.props.navigation.setParams({ onPressBackButton: this._onPressBackButton });
+        this.props.navigation.setParams({ onPressUndoButton: this._onPressUndoButton });
     }
 
     render() {
         const { state } = this.props.navigation;
-        let stickerViews = []
 
-        console.log("STICKERS COUNT: ", this.state.stickers.length);
+        let stickerViews = [];
 
         for (let i = 0; i < this.state.stickers.length; i++) {
             stickerViews.push(
@@ -63,8 +73,6 @@ class FeedScreen extends React.Component {
                     id={`${i}`}
                     key={`${i}`}
                     source={this.state.stickers[i].image.path}
-                    zIndex={this.state.stickers[i].zIndex}
-                    onTap={() => this._onTapSticker(`${i}`)}
                 />
             )
         }
@@ -82,9 +90,9 @@ class FeedScreen extends React.Component {
                 </View>
                 <View style={styles.stickersBottom}>
                     <View style={styles.stickerListContainer}>
-                        <StickerList style={{flex: 1}} data={stickerData} onPressStickerListItem={this._handleStickerListItemPress.bind(this)} />
+                        <StickerList style={{flex: 1}} data={stickerData} onPressStickerListItem={this._onPressStickerListItem.bind(this)} />
                     </View>
-                    <TouchableOpacity style={[styles.saveButton, this.state.isSaving && styles.saveButtonSaving]} onPress={this._handleSave} disabled={this.state.isSaving}>
+                    <TouchableOpacity style={[styles.saveButton, this.state.isSaving && styles.saveButtonSaving]} onPress={this._onPressSaveButton} disabled={this.state.isSaving}>
                         <Text style={styles.saveButtonText}>{this.state.isSaving ? 'SAVING...' : 'SAVE' }</Text>
                     </TouchableOpacity>
                 </View>
@@ -92,26 +100,22 @@ class FeedScreen extends React.Component {
         )
     }
 
-    _onTapSticker(index: string) {
-        let stickers = [];
-        this.state.stickers.forEach((sticker) => {
-            sticker.zIndex = sticker.id == index ? 2 : 1;
-            stickers.push(sticker);
-        });
-
-        this.setState({ stickers: stickers});
-    }
-
-    _handleStickerListItemPress(id) {
+    _onPressStickerListItem(id: string) {
         let stickers = this.state.stickers;
         this.setState({ stickers: [...stickers, stickerData[id]] });
     }
 
-    _handleBackButtonPress = () => {
+    _onPressBackButton = () => {
         this.props.navigation.goBack();
     }
 
-    _handleSave = async () => {
+    _onPressUndoButton = () => {
+        let stickers = this.state.stickers;
+        stickers.pop();
+        this.setState({ stickers: stickers });
+    }
+
+    _onPressSaveButton = async () => {
         const { state } = this.props.navigation;
 
         this.setState({ isSaving: true });
