@@ -79,7 +79,6 @@ class FeedScreen extends React.Component {
         for (let i = 0; i < this.state.stickers.length; i++) {
             stickerViews.push(
                 <Sticker
-                    style={{ left: 0, top: 0, position: 'absolute', }}
                     id={`${i}`}
                     source={this.state.stickers[i].image.path}
                 />
