@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#FC508B',
+        borderTopWidth: 2,
+        borderTopColor: '#000',
         height: screenHeight / 2,
         width: screenWidth
     },
