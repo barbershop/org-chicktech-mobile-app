@@ -8,16 +8,13 @@ import {
 } from 'react-native';
 import FeedList from '../components/FeedList';
 import { NavigationActions } from 'react-navigation';
-import CameraStackNavigator from '../navigation/CameraStackNavigator';
 
 const resetAction = NavigationActions.reset({
     index: 0,
     actions: [
         NavigationActions.navigate({ routeName: 'FeedScreen' })
     ]
-})
-
-import firebase from '../../helpers/firebase';
+});
 
 class GetStartedScreen extends React.Component {
 
@@ -28,7 +25,7 @@ class GetStartedScreen extends React.Component {
             <View style={{ flex: 1 }}>
                 <Image style={styles.backgroundImage} source={require('../assets/splash.png')} resizeMode='cover'/>
                 <TouchableHighlight style={styles.getStartedButton} underlayColor='#FC508B' onPress={ () => this._onPressGetStarted() }>
-                    <Text style={styles.getStartedText}>Get Started</Text>
+                    <Text style={styles.getStartedText}>GET STARTED</Text>
                 </TouchableHighlight>
             </View>
         )
@@ -48,11 +45,11 @@ const styles = StyleSheet.create({
     getStartedButton: {
         backgroundColor: '#000',
         borderRadius: 25,
+        height: 50,
+        width: '80%',
+        position: 'absolute',
         bottom: 30,
         left: '10%',
-        height: 50,
-        position: 'absolute',
-        width: '80%',
         alignItems: 'center',
         justifyContent: 'center'
     },

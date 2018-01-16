@@ -56,7 +56,6 @@ export default class CameraScreen extends React.Component {
     }
 
     _takePicture = async () => {
-        console.log('TAKE PICTURE')
         if (this.camera) {
             let photo = await this.camera.takePictureAsync();
             this.props.navigation.navigate('StickersScreen', { photo: photo });

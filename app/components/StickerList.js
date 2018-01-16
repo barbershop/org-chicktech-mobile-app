@@ -23,7 +23,6 @@ export default class StickerList extends React.PureComponent {
     );
 
     render() {
-        console.log(`RENDER FEED LIST: ${this.props.data.length}`);
         return (
             <FlatList
                 horizontal={true}

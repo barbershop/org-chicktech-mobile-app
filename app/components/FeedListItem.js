@@ -16,7 +16,6 @@ export default class FeedListItem extends React.PureComponent {
     };
 
     render() {
-        console.log('RENDER FEED LIST ITEM');
         return (
             <TouchableOpacity style={styles.container} onPress={this._onPress}>
                 <View style={styles.containerView}>

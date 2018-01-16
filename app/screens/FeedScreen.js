@@ -74,8 +74,7 @@ export default class FeedScreen extends React.Component {
                 item.id = key;
                 mappedMedia.push(item);
             };
-
-            console.log("FIREBASE MEDIA: ", mappedMedia);
+            
             this.setState({ feedData: mappedMedia.reverse() });
         });
     }

@@ -122,10 +122,10 @@ export default Sticker;
 
 const styles = StyleSheet.create({
     pinchableImage: {
-        width: 150,
-        height: 150,
+        width: 200,
+        height: 200,
         position: 'absolute',
-        left: (screenWidth / 2) - 75,
-        top: (screenWidth / 2) - 75
+        left: (screenWidth / 2) - 100,
+        top: (screenWidth / 2) - 100
     },
 });
