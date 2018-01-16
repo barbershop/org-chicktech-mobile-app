@@ -17,32 +17,12 @@ import Expo from 'expo';
 import StickerList from '../components/StickerList';
 import Sticker from '../components/Sticker';
 
-import { uuid } from '../helpers/utils';
-import firebase from '../helpers/firebase';
+import { uuid } from '../../helpers/utils';
+import firebase from '../../helpers/firebase';
+import stickerData from '../assets/stickers'
 
 var screenWidth = Dimensions.get('window').width;
 var screenHeight = Dimensions.get('window').height;
-
-var stickerData = [
-    {
-        id: 0,
-        image: {
-            path: require('../../assets/stickers/sticker-hat.png')
-        }
-    },
-    {
-        id: 1,
-        image: {
-            path: require('../../assets/stickers/sticker-hat.png')
-        },
-    },
-    {
-        id: 2,
-        image: {
-            path: require('../../assets/stickers/sticker-hat.png')
-        }
-    }
-]
 
 class FeedScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -54,7 +34,7 @@ class FeedScreen extends React.Component {
                 <Image
                     style={{ flex: 1 }}
                     resizeMode='contain'
-                    source={require('../../assets/back-button.png')}
+                    source={require('../assets/back-button.png')}
                 />
             </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
@@ -81,6 +61,8 @@ class FeedScreen extends React.Component {
                 <Sticker
                     id={`${i}`}
                     source={this.state.stickers[i].image.path}
+                    zIndex={this.state.stickers[i].zIndex}
+                    onTap={() => this._onTapSticker(`${i}`)}
                 />
             )
         }
@@ -106,6 +88,16 @@ class FeedScreen extends React.Component {
                 </View>
             </View>
         )
+    }
+
+    _onTapSticker(index: string) {
+        let stickers = [];
+        this.state.stickers.forEach((sticker) => {
+            sticker.zIndex = sticker.id == index ? 2 : 1;
+            stickers.push(sticker);
+        });
+
+        this.setState({ stickers: stickers});
     }
 
     _handleStickerListItemPress(id) {
@@ -190,8 +182,7 @@ const styles = StyleSheet.create({
     },
     stickersBottom: {
         backgroundColor: '#FC508B',
-        height: screenHeight / 2,
-        width: screenWidth
+        flex: 1
     },
     photo: {
         flex: 1

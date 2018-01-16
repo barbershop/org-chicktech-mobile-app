@@ -11,7 +11,7 @@ import {
 import FeedList from '../components/FeedList';
 import CameraStackNavigator from '../navigation/CameraStackNavigator';
 
-import firebase from '../helpers/firebase';
+import firebase from '../../helpers/firebase';
 
 export default class FeedScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -23,7 +23,7 @@ export default class FeedScreen extends React.Component {
                         <Image
                             style={{ flex: 1 }}
                             resizeMode='contain'
-                            source={require('../../assets/camera-button.png')}
+                            source={require('../assets/camera-button.png')}
                         />
             </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 }
