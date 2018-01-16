@@ -3,6 +3,7 @@
 import React from 'react';
 import {
     FlatList,
+    View,
     StyleSheet
 } from 'react-native';
 import FeedListItem from './FeedListItem';
@@ -34,6 +35,7 @@ export default class FeedList extends React.PureComponent {
                 extraData={this.state}
                 keyExtractor={this._keyExtractor}
                 renderItem={this._renderItem}
+                ItemSeparatorComponent={() => <View style={{ width: '100%', height: 3, backgroundColor: '#000' }}/> }
                 style={styles.list}
             />
         );
