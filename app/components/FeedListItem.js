@@ -3,7 +3,6 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity,
     Dimensions,
     StyleSheet
 } from 'react-native';
@@ -17,14 +16,15 @@ export default class FeedListItem extends React.PureComponent {
 
     render() {
         return (
-            <TouchableOpacity style={styles.container} onPress={this._onPress}>
-                <View style={styles.containerView}>
-                    <Image
-                        style={styles.image}
-                        source={{ uri: this.props.image.uri }}
-                    />
+            <View style={styles.containerView}>
+                <Image
+                    style={styles.image}
+                    source={{ uri: this.props.image.uri }}
+                />
+                <View style={styles.userView}>
+                    <Text style={styles.userText}>{this.props.user}</Text>
                 </View>
-            </TouchableOpacity>
+            </View>
         );
     }
 }
@@ -34,9 +34,20 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     containerView: {
-        flex: 1,       
-    },
-    container: {
         height: screenWidth
+    },
+    userView: {
+        backgroundColor: '#000',
+        position: 'absolute',
+        right: 0,
+        bottom: 0,
+        paddingVertical: 5,
+        paddingHorizontal: 10
+    },
+    userText: {
+        color: '#fff',
+        fontFamily: 'Avenir',
+        fontStyle: 'italic',
+        fontSize: 14
     }
 });

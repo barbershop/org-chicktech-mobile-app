@@ -159,7 +159,7 @@ class FeedScreen extends React.Component {
                 image: {
                     uri: url
                 },
-                userId: 'testuser'
+                user: 'testuser'
             });
 
             this.setState({ isSaving: false });

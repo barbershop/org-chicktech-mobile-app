@@ -24,6 +24,7 @@ export default class FeedList extends React.PureComponent {
             onPressItem={this._onPressItem}
             selected={!!this.state.selected.get(item.id)}
             image={item.image}
+            user={item.user}
         />
     );
 
