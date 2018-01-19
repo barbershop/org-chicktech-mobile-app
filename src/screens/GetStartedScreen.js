@@ -1,26 +1,35 @@
 import React from 'react'
-import GetStartedView from '../../app/views/01_GetStartedView'
+import GetStartedView from '../../app/views/GetStartedView'
 import FeedList from '../components/FeedList'
 import { NavigationActions } from 'react-navigation'
 
-const resetAction = NavigationActions.reset({
+const feedScreenAction = NavigationActions.reset({
     index: 0,
     actions: [
         NavigationActions.navigate({ routeName: 'FeedScreen' })
     ]
 })
 
-class GetStartedScreen extends React.Component {
+const cameraScreenAction = NavigationActions.reset({
+    index: 0,
+    actions: [
+        NavigationActions.navigate({ routeName: 'CameraScreen' })
+    ]
+})
+
+export default class GetStartedScreen extends React.Component {
 
     static navigationOptions = { header: null }
 
     render() {
-        return GetStartedView(this.goToNextScreen.bind(this))
+        return GetStartedView(this.goToView.bind(this))
     }
 
-    goToNextScreen() {
-        this.props.navigation.dispatch(resetAction)
+    goToView(viewName) {
+        if (viewName === 'Camera') {
+            this.props.navigation.dispatch(cameraScreenAction)
+        } else if (viewName === 'Feed') {
+            this.props.navigation.dispatch(feedScreenAction)
+        }
     }
 }
-
-export default GetStartedScreen

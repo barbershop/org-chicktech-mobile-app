@@ -2,22 +2,21 @@ import React from 'react';
 import { View } from 'react-native'
 import { BackgroundImage, StartButton, Styles } from '../../src/components'
 
-export default GetStartedView = (goToNextScreen) => {
-    /***
-    
-    FUNCTIONS: 
+/*
 
-    goToNextScreen - Navigates to the next screen
+LESSON 01:
 
-    ***/
+Functions:
+    goToView(view) - Navigates to the next screen. view options are 'Camera' or 'Feed'
 
+*/
+
+export default GetStartedView = (goToView) => {
     return (
-        /* START: LESSON 1.0 */
         <View style={styles.container}>
             <BackgroundImage filename="background-image.png" />
-            <StartButton onPress={ goToNextScreen } style={styles.startButton}>GET STARTED</StartButton>
+            <StartButton onPress={() => { goToView('Camera') }} style={styles.startButton}>GET STARTED</StartButton>
         </View>
-        /* END: LESSON 1.0 */
     )
 }
 

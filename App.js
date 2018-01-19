@@ -1,6 +1,7 @@
 import React from 'react';
 import GetStartedScreen from './src/screens/GetStartedScreen';
 import FeedScreen from './src/screens/FeedScreen';
+import CameraScreen from './src/screens/CameraScreen';
 
 import {
   StackNavigator,
@@ -8,7 +9,8 @@ import {
 
 const MainNavigator = StackNavigator({
   GetStartedScreen: { screen: GetStartedScreen },
-  FeedScreen: { screen: FeedScreen }
+  FeedScreen: { screen: FeedScreen },
+  CameraScreen: { screen: CameraScreen }
 });
 
 export default MainNavigator;
