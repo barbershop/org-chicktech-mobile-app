@@ -1,6 +1,6 @@
 import React from 'react';
-import GetStartedScreen from './app/screens/GetStartedScreen';
-import FeedScreen from './app/screens/FeedScreen';
+import GetStartedScreen from './src/screens/GetStartedScreen';
+import FeedScreen from './src/screens/FeedScreen';
 
 import {
   StackNavigator,

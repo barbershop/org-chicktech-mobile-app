@@ -8,10 +8,10 @@ import {
     Image,
     StyleSheet
 } from 'react-native';
-import FeedList from '../components/FeedList';
-import CameraStackNavigator from '../navigation/CameraStackNavigator';
+import FeedList from '../../src/components/FeedList';
+import CameraStackNavigator from '../../src/navigation/CameraStackNavigator';
 
-import firebase from '../../helpers/firebase';
+import firebase from '../../src/helpers/firebase';
 
 export default class FeedScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -23,7 +23,7 @@ export default class FeedScreen extends React.Component {
                         <Image
                             style={{ flex: 1 }}
                             resizeMode='contain'
-                            source={require('../assets/buttons/camera-button.png')}
+                            source={require('../../app/assets/buttons/camera-button.png')}
                         />
             </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 }

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Text, View, TouchableOpacity, Image, Dimensions, StyleSheet } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import React from 'react'
+import { Text, View, TouchableOpacity, Image, Dimensions, StyleSheet } from 'react-native'
+import { Camera, Permissions } from 'expo'
 
-var screenWidth = Dimensions.get('window').width; 
-var screenHeight = Dimensions.get('window').height; 
+var screenWidth = Dimensions.get('window').width 
+var screenHeight = Dimensions.get('window').height 
 
 export default class CameraScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -16,7 +16,7 @@ export default class CameraScreen extends React.Component {
                 <Image
                     style={{ flex: 1 }}
                     resizeMode='contain'
-                    source={require('../assets/buttons/close-button.png')}
+                    source={require('../../app/assets/buttons/close-button.png')}
                 />
             </TouchableOpacity>
         }
@@ -28,22 +28,22 @@ export default class CameraScreen extends React.Component {
     }
 
     async componentWillMount() {
-        this.props.navigation.setParams({ handleCloseCamera: this._handleCloseCamera });
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        this.setState({ hasCameraPermission: status === 'granted' });
+        this.props.navigation.setParams({ handleCloseCamera: this._handleCloseCamera })
+        const { status } = await Permissions.askAsync(Permissions.CAMERA)
+        this.setState({ hasCameraPermission: status === 'granted' })
     }
 
     render() {
-        const { hasCameraPermission } = this.state;
+        const { hasCameraPermission } = this.state
         if (hasCameraPermission === null) {
-            return <View />;
+            return <View />
         } else if (hasCameraPermission === false) {
-            return <Text>No access to camera</Text>;
+            return <Text>No access to camera</Text>
         } else {
             return (
                 <View style={styles.container}>
                     <View style={styles.cameraContainer}>
-                        <Camera style={styles.camera} type={this.state.type} ref={ref => { this.camera = ref; }} />
+                        <Camera style={styles.camera} type={this.state.type} ref={ref => { this.camera = ref }} />
                     </View>
                     <View style={styles.cameraBottom}>
                         <View style={styles.cameraButtonContainer}>
@@ -51,19 +51,19 @@ export default class CameraScreen extends React.Component {
                         </View>
                     </View>
                 </View>
-            );
+            )
         }
     }
 
     _takePicture = async () => {
         if (this.camera) {
-            let photo = await this.camera.takePictureAsync();
-            this.props.navigation.navigate('StickersScreen', { photo: photo });
+            let photo = await this.camera.takePictureAsync()
+            this.props.navigation.navigate('StickersScreen', { photo: photo })
         }
-    };
+    }
 
     _handleCloseCamera = () => {
-        this.props.screenProps.onClose();
+        this.props.screenProps.onClose()
     }
 }
 
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
         borderColor: '#000',
         borderWidth: 4
     },
-});
+})

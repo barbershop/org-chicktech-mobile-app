@@ -15,12 +15,12 @@ import {
 
 import Expo from 'expo';
 
-import StickerList from '../components/StickerList';
-import Sticker from '../components/Sticker';
+import StickerList from '../../src/components/StickerList';
+import Sticker from '../../src/components/Sticker';
 
-import { uuid } from '../../helpers/utils';
-import firebase from '../../helpers/firebase';
-import stickerData from '../assets/stickers';
+import { uuid } from '../../src/helpers/utils';
+import firebase from '../../src/helpers/firebase';
+import stickerData from '../../app/assets/stickers';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -37,7 +37,7 @@ class FeedScreen extends React.Component {
                     <Image
                         style={{ flex: 1 }}
                         resizeMode='contain'
-                        source={require('../assets/buttons/back-button.png')}
+                        source={require('../../app/assets/buttons/back-button.png')}
                     />
                 </TouchableOpacity>,
             headerRight:
@@ -45,7 +45,7 @@ class FeedScreen extends React.Component {
                     <Image
                         style={{ flex: 1 }}
                         resizeMode='contain'
-                        source={require('../assets/buttons/undo-button.png')}
+                        source={require('../../app/assets/buttons/undo-button.png')}
                     />
                 </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
