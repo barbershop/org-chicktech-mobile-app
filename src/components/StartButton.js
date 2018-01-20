@@ -5,10 +5,8 @@ export default class StartButton extends React.PureComponent {
     render() {
         const { onPress, style } = this.props;
         return (
-            <TouchableHighlight onPress={onPress}>
-                <View style={[styles.button, style]}>
-                    {this.props.children}
-                </View>
+            <TouchableHighlight onPress={onPress} style={[styles.button, style]}>
+                {this.props.children}
             </TouchableHighlight>
         )
     }
