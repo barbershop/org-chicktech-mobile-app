@@ -9,7 +9,7 @@ export default class GetStartedView extends React.PureComponent {
                 <BackgroundImage filename="" />
                 <TitleText>Hello World</TitleText>
                 <StartButton onPress={() => { }} style={styles.startButton}>
-                    <Text style={styles.startButtonText}>PRESS HERE</Text>
+                    <Text style={styles.startButtonText}></Text>
                 </StartButton>
             </View>
         )
@@ -23,6 +23,7 @@ export default class GetStartedView extends React.PureComponent {
 
 const styles = Styles({
     container: {
+        backgroundColor: 'white',
         flex: 1
     },
     titleText: {
