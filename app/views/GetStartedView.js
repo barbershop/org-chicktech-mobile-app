@@ -1,32 +1,42 @@
 import React from 'react';
-import { View } from 'react-native'
-import { BackgroundImage, StartButton, Styles } from '../../src/components'
+import { View, Text } from 'react-native'
+import { BackgroundImage, TitleText, StartButton, Styles } from '../../src/components'
 
-/*
+export default class GetStartedView extends React.PureComponent {
+    render() {
+        return (
+            <View style={styles.container}>
+                <BackgroundImage filename="background-image.png" />
+                <TitleText style={styles.titleText}>Sticker Pics</TitleText>
+                <StartButton onPress={() => this.onPressStartButton()} style={styles.startButton}>
+                    <Text style={styles.startButtonText}>GET STARTED</Text>
+                </StartButton>
+            </View>
+        )
+    }
 
-LESSON 01:
-
-Functions:
-    goToView(view) - Navigates to the next screen. view options are 'Camera' or 'Feed'
-
-*/
-
-export default GetStartedView = (goToView) => {
-    return (
-        <View style={styles.container}>
-            <BackgroundImage filename="background-image.png" />
-            <StartButton onPress={() => { goToView('Camera') }} style={styles.startButton}>GET STARTED</StartButton>
-        </View>
-    )
+    onPressStartButton() {
+        this.props.gotToView('Camera')
+    }
 }
 
 const styles = Styles({
     container: {
         flex: 1
     },
+    titleText: {
+        color: 'hotpink',
+        fontFamily: 'Carosello',
+        fontSize: 60
+    },
     startButton: {
-        backgroundColor: '#000',
+        backgroundColor: 'black',
         borderRadius: 25,
         height: 50,
+    },
+    startButtonText: {
+        color: 'white',
+        fontFamily: 'Avenir-Heavy-Oblique',
+        fontSize: 20
     }
 })

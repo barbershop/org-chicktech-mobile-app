@@ -1,29 +1,34 @@
-import React from 'react';
-import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
+import React from 'react'
+import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
 import { CameraComponent, Styles } from '../../src/components'
 
-/*
-
-LESSON 02:
-
-*/
-
 var screenWidth = Dimensions.get('window').width
-var screenHeight = Dimensions.get('window').height 
+var screenHeight = Dimensions.get('window').height
 
-export const CameraView = (takePicture) => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.cameraContainer}>
-                <CameraComponent type="Front" />
-            </View>
-            <View style={styles.cameraBottom}>
-                <View style={styles.cameraButtonContainer}>
-                    <TouchableOpacity style={styles.cameraButton} onPress={() => { takePicture() }} />
+export const CameraHeader = {
+    title: 'CAMERA'
+}
+
+export class CameraView extends React.PureComponent {
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.cameraContainer}>
+                    <CameraComponent type="Front" />
+                </View>
+                <View style={styles.cameraBottom}>
+                    <View style={styles.cameraButtonContainer}>
+                        <TouchableOpacity style={styles.cameraButton} onPress={() => { this.takePicture() }} />
+                    </View>
                 </View>
             </View>
-        </View>
-    )
+        )
+    }
+
+    takePicture() {
+        this.props.takePicture()
+    }
 }
 
 const styles = Styles({

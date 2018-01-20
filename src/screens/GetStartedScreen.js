@@ -2,6 +2,7 @@ import React from 'react'
 import GetStartedView from '../../app/views/GetStartedView'
 import FeedList from '../components/FeedList'
 import { NavigationActions } from 'react-navigation'
+import { AppLoading, Font } from 'expo'
 
 const feedScreenAction = NavigationActions.reset({
     index: 0,
@@ -21,8 +22,25 @@ export default class GetStartedScreen extends React.Component {
 
     static navigationOptions = { header: null }
 
+    state = {
+        isReady: false
+    }
+
+    componentWillMount() {
+
+    }
+
     render() {
-        return GetStartedView(this.goToView.bind(this))
+        if (!this.state.isReady) {
+            return (
+                <AppLoading
+                    startAsync={this._cacheResourcesAsync}
+                    onFinish={() => this.setState({ isReady: true })}
+                    onError={console.warn}
+                />
+            );
+        }
+        return (<GetStartedView gotToView={this.goToView.bind(this)}/>)
     }
 
     goToView(viewName) {
@@ -31,5 +49,12 @@ export default class GetStartedScreen extends React.Component {
         } else if (viewName === 'Feed') {
             this.props.navigation.dispatch(feedScreenAction)
         }
+    }
+
+    async _cacheResourcesAsync() {
+        return Font.loadAsync({
+            'Avenir-Heavy-Oblique': require('../assets/fonts/Avenir-HeavyOblique.otf'),
+            'Carosello': require('../assets/fonts/Carosello-Regular.ttf'),
+        });
     }
 }

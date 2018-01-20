@@ -7,9 +7,7 @@ export default class StartButton extends React.PureComponent {
         return (
             <TouchableHighlight onPress={onPress}>
                 <View style={[styles.button, style]}>
-                    <Text style={[styles.text]}>
-                        {this.props.children}
-                    </Text>
+                    {this.props.children}
                 </View>
             </TouchableHighlight>
         )
@@ -24,12 +22,5 @@ const styles = StyleSheet.create({
         left: '10%',
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    text: {
-        color: 'white',
-        fontFamily: 'Avenir',
-        fontWeight: '900',
-        fontStyle: 'italic',
-        fontSize: 20
     }
 })
