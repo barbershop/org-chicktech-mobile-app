@@ -37,7 +37,7 @@ class FeedScreen extends React.Component {
                     <Image
                         style={{ flex: 1 }}
                         resizeMode='contain'
-                        source={require('../../app/assets/buttons/back-button.png')}
+                        source={require('../assets/buttons/back-button.png')}
                     />
                 </TouchableOpacity>,
             headerRight:
@@ -45,7 +45,7 @@ class FeedScreen extends React.Component {
                     <Image
                         style={{ flex: 1 }}
                         resizeMode='contain'
-                        source={require('../../app/assets/buttons/undo-button.png')}
+                        source={require('../assets/buttons/undo-button.png')}
                     />
                 </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },

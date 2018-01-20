@@ -25,7 +25,7 @@ export default class CameraScreen extends React.Component {
                 <Image
                     style={{ flex: 1 }}
                     resizeMode='contain'
-                    source={require('../../app/assets/buttons/close-button.png')}
+                    source={require('../assets/buttons/close-button.png')}
                 />
             </TouchableOpacity>
         }

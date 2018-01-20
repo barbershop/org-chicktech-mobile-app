@@ -23,7 +23,7 @@ export default class FeedScreen extends React.Component {
                         <Image
                             style={{ flex: 1 }}
                             resizeMode='contain'
-                            source={require('../../app/assets/buttons/camera-button.png')}
+                            source={require('../assets/buttons/camera-button.png')}
                         />
             </TouchableOpacity>,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 }
