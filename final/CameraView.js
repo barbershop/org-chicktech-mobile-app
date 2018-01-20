@@ -15,10 +15,12 @@ export class CameraView extends React.PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.cameraContainer}>
-
+                    <CameraComponent type="Front" />
                 </View>
                 <View style={styles.cameraBottom}>
-
+                    <View style={styles.cameraButtonContainer}>
+                        <TouchableOpacity style={styles.cameraButton} onPress={() => { this.takePicture() }} />
+                    </View>
                 </View>
             </View>
         )

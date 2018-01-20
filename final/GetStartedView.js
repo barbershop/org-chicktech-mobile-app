@@ -6,18 +6,18 @@ export default class GetStartedView extends React.PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                <BackgroundImage filename="" />
-                <TitleText>Hello World</TitleText>
-                <StartButton onPress={() => { }} style={styles.startButton}>
-                    <Text style={styles.startButtonText}>PRESS HERE</Text>
+                <BackgroundImage filename="background-image.png" />
+                <TitleText style={styles.titleText}>Sticker Pics</TitleText>
+                <StartButton onPress={() => this.onPressStartButton()} style={styles.startButton}>
+                    <Text style={styles.startButtonText}>GET STARTED</Text>
                 </StartButton>
             </View>
         )
     }
 
     onPressStartButton() {
-        // this.props.gotToView('Camera')
-        Alert.alert('Button Pressed!')
+        this.props.gotToView('Camera')
+        // Alert.alert('Button Pressed!')
     }
 }
 
@@ -27,14 +27,18 @@ const styles = Styles({
     },
     titleText: {
         color: 'hotpink',
+        fontFamily: 'Carosello',
         fontSize: 60,
         top: 95
     },
     startButton: {
         backgroundColor: 'black',
+        borderRadius: 25,
         height: 50,
     },
     startButtonText: {
-        color: 'white'
+        color: 'white',
+        fontFamily: 'Avenir-Heavy-Oblique',
+        fontSize: 20
     }
 })
