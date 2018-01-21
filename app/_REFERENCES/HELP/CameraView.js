@@ -67,13 +67,13 @@ const styles = Styles({
         backgroundColor: 'white',
         width: 80,
         height: 80,
-        borderRadius: 100 / 2,
+        borderRadius: 50,
     },
     cameraButton: {
         backgroundColor: 'white',
         width: 70,
         height: 70,
-        borderRadius: 100 / 2,
+        borderRadius: 50,
         borderColor: 'black',
         borderWidth: 4
     },
