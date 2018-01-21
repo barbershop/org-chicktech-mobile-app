@@ -9,7 +9,7 @@ import {
     StyleSheet
 } from 'react-native';
 
-import FeedView from '../../app/views/FeedView'
+import { FeedHeader, FeedView } from '../../app/views/FeedView'
 
 import CameraStackNavigator from '../../src/navigation/CameraStackNavigator';
 
@@ -20,14 +20,14 @@ export default class FeedScreen extends React.Component {
         const { params = {} } = navigation.state
 
         return {
-            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir-Heavy-Oblique', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>FEED</Text>,
-            headerRight: <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.handleCamera()}>
+            headerTitle: <Text style={FeedHeader.headerTitleStyle}>{FeedHeader.headerTitle}</Text>,
+            headerRight: FeedHeader.headerRightButtonImage ?  <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.handleCamera()}>
                         <Image
                             style={{ flex: 1 }}
                             resizeMode='contain'
-                            source={require('../assets/buttons/camera-button.png')}
+                                source={FeedHeader.headerRightButtonImage}
                         />
-            </TouchableOpacity>,
+            </TouchableOpacity> : null,
             headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 }
         }
     }

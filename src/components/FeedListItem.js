@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     userText: {
         color: '#fff',
-        fontFamily: 'Avenir',
+        fontFamily: 'Avenir-Heavy-Oblique',
         fontStyle: 'italic',
         fontSize: 14
     }

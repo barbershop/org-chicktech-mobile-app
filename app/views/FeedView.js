@@ -4,7 +4,7 @@ import { FeedList } from '../../src/components'
 
 export const FeedHeader = {
     title: 'FEED',
-    headerRightButtonImage: '',
+    headerRightButtonImage: require('../assets/buttons/camera-button.png'),
     headerTitleStyle: {
         color: 'white',
         fontFamily: 'Avenir-Heavy-Oblique',
@@ -14,11 +14,11 @@ export const FeedHeader = {
         backgroundColor: '#FC508B',
         height: 60,
         borderBottomColor: 'black',
-        borderBottomWidth: 5
+        borderBottomWidth: 2
     }
 }
 
-export default class FeedView extends React.PureComponent {
+export class FeedView extends React.PureComponent {
 
     /*
         props:
@@ -28,7 +28,6 @@ export default class FeedView extends React.PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                
             </View>
         )
     }
