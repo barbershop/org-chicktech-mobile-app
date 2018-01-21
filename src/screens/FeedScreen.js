@@ -18,7 +18,7 @@ export default class FeedScreen extends React.Component {
         const { params = {} } = navigation.state
 
         return {
-            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>FEED</Text>,
+            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir-Heavy-Oblique', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>FEED</Text>,
             headerRight: <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.handleCamera()}>
                         <Image
                             style={{ flex: 1 }}

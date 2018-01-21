@@ -119,7 +119,7 @@ const styles = Styles({
     },
     saveButtonText: {
         color: '#fff',
-        fontFamily: 'Avenir',
+        fontFamily: 'Avenir-Heavy-Oblique',
         fontWeight: '900',
         fontStyle: 'italic',
         fontSize: 20
