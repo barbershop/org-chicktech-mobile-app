@@ -49,13 +49,13 @@ export default class CameraScreen extends React.Component {
         } else if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>
         } else {
-            return <CameraView takePicture={this._takePicture.bind(this)} onPressClose={this._handleCloseCamera.bind(this)}/>
+            return <CameraView takePicture={this._takePicture.bind(this)} onPressClose={this._handleCloseCamera.bind(this)} ref="cameraView" />
         }
     }
 
     _takePicture = async () => {
-        if (this.refs.camera) {
-            let photo = await this.camera.takePictureAsync()
+        if (this.refs.cameraView.refs.cameraComponent.refs.camera) {
+            let photo = await this.refs.cameraView.refs.cameraComponent.refs.camera.takePictureAsync()
             this.props.navigation.navigate('StickersScreen', { photo: photo })
         }
     }

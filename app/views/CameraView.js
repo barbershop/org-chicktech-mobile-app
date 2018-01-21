@@ -18,6 +18,11 @@ export const CameraHeader = {
 
 export class CameraView extends React.PureComponent {
 
+    /*
+        props:
+            takePicture() - A function to take a photo and go to the next view
+    */
+
     render() {
         return (
             <View style={styles.container}>
@@ -25,10 +30,7 @@ export class CameraView extends React.PureComponent {
             </View>
         )
     }
-
-    takePicture() {
-        this.props.takePicture()
-    }
+    
 }
 
 const styles = Styles({

@@ -11,7 +11,7 @@ import {
 
 var screenWidth = Dimensions.get('window').width;
 
-export class Sticker extends React.Component {
+export default class Sticker extends React.Component {
     constructor(props) {
         super(props);
 
@@ -117,8 +117,6 @@ export class Sticker extends React.Component {
         );
     }
 }
-
-export default Sticker;
 
 const styles = StyleSheet.create({
     pinchableImage: {

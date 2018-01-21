@@ -1,8 +1,11 @@
 import React from 'react'
+import { View, Modal } from 'react-native'
 import GetStartedView from '../../app/views/GetStartedView'
 import FeedList from '../components/FeedList'
 import { NavigationActions } from 'react-navigation'
 import { AppLoading, Font } from 'expo'
+
+import CameraStackNavigator from '../../src/navigation/CameraStackNavigator';
 
 const feedScreenAction = NavigationActions.reset({
     index: 0,
@@ -23,7 +26,8 @@ export default class GetStartedScreen extends React.Component {
     static navigationOptions = { header: null }
 
     state = {
-        isReady: false
+        isReady: false,
+        cameraModalVisible: false
     }
 
     componentWillMount() {
@@ -40,15 +44,30 @@ export default class GetStartedScreen extends React.Component {
                 />
             );
         }
-        return (<GetStartedView gotToView={this.goToView.bind(this)}/>)
+        return (
+            <View style={{flex: 1}}>
+                <GetStartedView gotToView={this.goToView.bind(this)}/>
+                <Modal
+                    visible={this.state.cameraModalVisible}
+                    animationType={'slide'}>
+                    <CameraStackNavigator style={{ flex: 1 }} screenProps={{
+                        onClose: this._handleModalClose.bind(this)
+                    }} />
+                </Modal>
+            </View>
+        )
     }
 
     goToView(viewName) {
         if (viewName === 'Camera') {
-            this.props.navigation.dispatch(cameraScreenAction)
+            this.setState({cameraModalVisible: true})
         } else if (viewName === 'Feed') {
             this.props.navigation.dispatch(feedScreenAction)
         }
+    }
+
+    _handleModalClose() {
+        this.setState({ cameraModalVisible: false })
     }
 
     async _cacheResourcesAsync() {

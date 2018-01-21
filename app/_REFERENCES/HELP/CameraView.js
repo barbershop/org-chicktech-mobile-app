@@ -23,23 +23,24 @@ export const CameraHeader = {
 
 export class CameraView extends React.PureComponent {
 
+    /*
+        props:
+            takePicture() - A function to take a photo and go to the next view
+    */
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.cameraContainer}>
-                    <CameraComponent type="Front" />
+                    <CameraComponent type="Front" ref="cameraComponent" />
                 </View>
                 <View style={styles.cameraBottom}>
                     <View style={styles.cameraButtonContainer}>
-                        <Button style={styles.cameraButton} onPress={() => { this.takePicture() }} />
+                        <Button style={styles.cameraButton} onPress={() => { this.props.takePicture() }} />
                     </View>
                 </View>
             </View>
         )
-    }
-
-    takePicture() {
-        this.props.takePicture()
     }
 }
 

@@ -16,7 +16,7 @@ export default class StickerList extends React.PureComponent {
         <StickerListItem
             id={item.id}
             key={item.id}
-            onPressItem={this.props.onPressStickerListItem}
+            onPressItem={this.props.onPressSticker}
             selected={!!this.state.selected.get(item.id)}
             image={item.image}
         />

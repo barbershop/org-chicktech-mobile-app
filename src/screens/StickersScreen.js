@@ -18,6 +18,8 @@ import Expo from 'expo';
 import StickerList from '../../src/components/StickerList';
 import Sticker from '../../src/components/Sticker';
 
+import { StickersHeader, StickersView } from '../../app/views/StickersView'
+
 import { uuid } from '../../src/helpers/utils';
 import firebase from '../../src/helpers/firebase';
 import stickerData from '../../app/assets/stickers';
@@ -31,24 +33,24 @@ class FeedScreen extends React.Component {
 
         return {
             headerTitle:
-                <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>STICKERS</Text>,
-            headerLeft:
+                <Text style={StickersHeader.headerTitleStyle}>{StickersHeader.headerTitle}</Text>,
+            headerLeft: StickersHeader.headerLeftButtonImage ?
                 <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginLeft: 5 }} onPress={() => params.onPressBackButton()}>
                     <Image
                         style={{ flex: 1 }}
                         resizeMode='contain'
-                        source={require('../assets/buttons/back-button.png')}
+                        source={StickersHeader.headerLeftButtonImage}
                     />
-                </TouchableOpacity>,
-            headerRight:
+                </TouchableOpacity> : null,
+            headerRight: StickersHeader.headerRightButtonImage ?
                 <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.onPressUndoButton()}>
                     <Image
                         style={{ flex: 1 }}
                         resizeMode='contain'
-                        source={require('../assets/buttons/undo-button.png')}
+                        source={StickersHeader.headerRightButtonImage}
                     />
-                </TouchableOpacity>,
-            headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
+                </TouchableOpacity> : null,
+            headerStyle: StickersHeader.headerStyle,
         }
     }
 
@@ -63,40 +65,17 @@ class FeedScreen extends React.Component {
     }
 
     render() {
+        console.log('STICKERS')
         const { state } = this.props.navigation;
 
-        let stickerViews = [];
-
-        for (let i = 0; i < this.state.stickers.length; i++) {
-            stickerViews.push(
-                <Sticker
-                    id={`${i}`}
-                    key={`${i}`}
-                    source={this.state.stickers[i].image.path}
-                />
-            )
-        }
-
         return (
-            <View style={styles.container}>
-                <View style={styles.stickersTop} ref="photoContainer">
-                    <Image
-                        style={{flex: 1}}
-                        source={{ uri: state.params.photo.uri }}
-                    />
-                    <View style={styles.stickersContainer}>
-                        { stickerViews }
-                    </View>
-                </View>
-                <View style={styles.stickersBottom}>
-                    <View style={styles.stickerListContainer}>
-                        <StickerList style={{flex: 1}} data={stickerData} onPressStickerListItem={this._onPressStickerListItem.bind(this)} />
-                    </View>
-                    <TouchableOpacity style={[styles.saveButton, this.state.isSaving && styles.saveButtonSaving]} onPress={this._onPressSaveButton} disabled={this.state.isSaving}>
-                        <Text style={styles.saveButtonText}>{this.state.isSaving ? 'SAVING...' : 'SAVE' }</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <StickersView ref="stickersView"
+                stickerData={stickerData}
+                photoSource={state.params.photo.uri}
+                stickers={this.state.stickers}
+                isSaving={this.state.isSaving}
+                savePhoto={this._onPressSaveButton.bind(this)}
+                addSticker={this._onPressStickerListItem.bind(this)}/>
         )
     }
 
@@ -115,7 +94,7 @@ class FeedScreen extends React.Component {
         this.setState({ stickers: stickers });
     }
 
-    _onPressSaveButton = async () => {
+    _onPressSaveButton = async (imageName) => {
         const { state } = this.props.navigation;
 
         this.setState({ isSaving: true });
@@ -124,7 +103,7 @@ class FeedScreen extends React.Component {
         const body = new FormData();
 
         try {
-            let result = await Expo.takeSnapshotAsync(this.refs.photoContainer, { format: 'jpg', result: 'file', quality: 1.0 });
+            let result = await Expo.takeSnapshotAsync(this.refs.stickersView.refs.photoContainer, { format: 'jpg', result: 'file', quality: 1.0 });
             let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
             body.append("picture", {
                 uri: result,
@@ -159,7 +138,7 @@ class FeedScreen extends React.Component {
                 image: {
                     uri: url
                 },
-                user: 'testuser'
+                user: imageName
             });
 
             this.setState({ isSaving: false });
@@ -170,48 +149,5 @@ class FeedScreen extends React.Component {
         }
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    stickersTop: {
-        height: screenHeight / 2,
-        width: screenWidth
-    },
-    stickersContainer: {
-        height: '100%',
-        width: '100%',
-        position: 'absolute',
-    },
-    stickersBottom: {
-        backgroundColor: '#FC508B',
-        flex: 1
-    },
-    stickerListContainer: {
-        backgroundColor: '#000',
-        height: 104,
-        width: screenWidth
-    },
-    saveButton: {
-        backgroundColor: 'transparent',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    saveButtonSaving: {
-        backgroundColor: 'rgba(0,0,0,0.2)'
-    },
-    saveButtonText: {
-        color: '#fff',
-        fontFamily: 'Avenir',
-        fontWeight: '900',
-        fontStyle: 'italic',
-        fontSize: 20
-    }
-});
 
 export default FeedScreen;
