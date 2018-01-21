@@ -8,7 +8,9 @@ import {
     Image,
     StyleSheet
 } from 'react-native';
-import FeedList from '../../src/components/FeedList';
+
+import FeedView from '../../app/views/FeedView'
+
 import CameraStackNavigator from '../../src/navigation/CameraStackNavigator';
 
 import firebase from '../../src/helpers/firebase';
@@ -42,12 +44,12 @@ export default class FeedScreen extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1, backgroundColor: '#000'}}>
-                <FeedList style={{flex: 1}} data={this.state.feedData} />
+            <View style={{flex:1}}>
+                <FeedView feedData={this.state.feedData} />
                 <Modal
                     visible={this.state.cameraModalVisible}
                     animationType={'slide'}>
-                    <CameraStackNavigator style={{ flex: 1 }} screenProps={{
+                    <CameraStackNavigator style={{flex:1}} screenProps={{
                         onClose: this._handleModalClose
                     }} />
                 </Modal>
