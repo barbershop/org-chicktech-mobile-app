@@ -36,24 +36,15 @@ export class StickersView extends React.PureComponent {
     }
 
     render() {
-        let stickerViews = [];
-
-        this.props.stickers.forEach((stickerView, i) => {
-            stickerViews.push(
-                <Sticker
-                    id={`${i}`}
-                    key={`${i}`}
-                    source={this.props.stickers[i].image.path}
-                />
-            )
-        })
+        let stickerViews = []
+        let saveText = null
 
         return (
             <View style={styles.container}>
                 <View style={styles.stickersTop} ref="photoContainer">
                     <Image
                         style={{ flex: 1 }}
-                        source={{ uri: this.props.photoSource }}
+                        source={{ uri: '' }}
                     />
                     <View style={styles.stickersContainer}>
                         {stickerViews}
@@ -61,11 +52,8 @@ export class StickersView extends React.PureComponent {
                 </View>
                 <View style={styles.stickersBottom}>
                     <View style={styles.stickerListContainer}>
-                        <StickerList style={styles.stickerList} data={this.props.stickerData} onPressSticker={(stickerId) => { this.props.addSticker(stickerId) }} />
+
                     </View>
-                    <TouchableOpacity style={[styles.saveButton, this.props.isSaving && styles.saveButtonSaving]} onPress={() => { this.props.savePhoto('ChickTech') }} disabled={this.props.isSaving}>
-                        <Text style={styles.saveButtonText}>{this.props.isSaving ? 'SAVING...' : 'SAVE'}</Text>
-                    </TouchableOpacity>
                 </View>
             </View>
         )

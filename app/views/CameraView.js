@@ -30,7 +30,7 @@ export class CameraView extends React.PureComponent {
             </View>
         )
     }
-    
+
 }
 
 const styles = Styles({

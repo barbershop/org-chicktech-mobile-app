@@ -48,6 +48,14 @@ export class StickersView extends React.PureComponent {
             )
         })
 
+        let saveText = null
+
+        if (this.props.isSaving) {
+            saveText = <Text style={styles.saveButtonText}>SAVING...</Text>
+        } else {
+            saveText = <Text style={styles.saveButtonText}>SAVE</Text>
+        }
+
         return (
             <View style={styles.container}>
                 <View style={styles.stickersTop} ref="photoContainer">
@@ -63,9 +71,9 @@ export class StickersView extends React.PureComponent {
                     <View style={styles.stickerListContainer}>
                         <StickerList style={styles.stickerList} data={this.props.stickerData} onPressSticker={(stickerId) => { this.props.addSticker(stickerId) }} />
                     </View>
-                    <TouchableOpacity style={[styles.saveButton, this.props.isSaving && styles.saveButtonSaving]} onPress={() => { this.props.savePhoto('ChickTech') }} disabled={this.props.isSaving}>
-                        <Text style={styles.saveButtonText}>{this.props.isSaving ? 'SAVING...' : 'SAVE'}</Text>
-                    </TouchableOpacity>
+                    <Button style={[styles.saveButton]} onPress={() => { this.props.savePhoto('ChickTech') }} disabled={this.props.isSaving}>
+                        {saveText}
+                    </Button>
                 </View>
             </View>
         )
