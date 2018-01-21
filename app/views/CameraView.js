@@ -1,12 +1,19 @@
 import React from 'react'
 import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
-import { CameraComponent, Styles } from '../../src/components'
+import { CameraComponent, Button, Styles } from '../../src/components'
 
 var screenWidth = Dimensions.get('window').width
 var screenHeight = Dimensions.get('window').height
 
 export const CameraHeader = {
-    title: 'CAMERA'
+    title: '',
+    headerRightButtonImage: '',
+    headerTitleStyle: {
+
+    },
+    headerStyle: {
+
+    }
 }
 
 export class CameraView extends React.PureComponent {
@@ -14,12 +21,7 @@ export class CameraView extends React.PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.cameraContainer}>
 
-                </View>
-                <View style={styles.cameraBottom}>
-
-                </View>
             </View>
         )
     }
@@ -34,33 +36,25 @@ const styles = Styles({
         flex: 1
     },
     cameraContainer: {
-        height: screenHeight / 2,
-        width: screenWidth
+
     },
     cameraBottom: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FC508B',
-        borderTopWidth: 2,
-        borderTopColor: '#000',
-        height: screenHeight / 2,
-        width: screenWidth
+        justifyContent: 'center'
     },
     cameraButtonContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         width: 80,
         height: 80,
-        borderRadius: 100 / 2,
     },
     cameraButton: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         width: 70,
         height: 70,
-        borderRadius: 100 / 2,
-        borderColor: '#000',
+        borderColor: 'black',
         borderWidth: 4
     },
 })

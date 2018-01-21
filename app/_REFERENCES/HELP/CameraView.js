@@ -1,12 +1,24 @@
 import React from 'react'
 import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
-import { CameraComponent, Styles } from '../../src/components'
+import { CameraComponent, Button, Styles } from '../../src/components'
 
 var screenWidth = Dimensions.get('window').width
 var screenHeight = Dimensions.get('window').height
 
 export const CameraHeader = {
-    title: 'CAMERA'
+    title: 'CAMERA',
+    headerRightButtonImage: require('../assets/buttons/close-button.png'),
+    headerTitleStyle: {
+        color: 'white',
+        fontFamily: 'Avenir-Heavy-Oblique',
+        fontSize: 20
+    },
+    headerStyle: {
+        backgroundColor: '#FC508B',
+        height: 60,
+        borderBottomColor: 'black',
+        borderBottomWidth: 2
+    }
 }
 
 export class CameraView extends React.PureComponent {
@@ -19,7 +31,7 @@ export class CameraView extends React.PureComponent {
                 </View>
                 <View style={styles.cameraBottom}>
                     <View style={styles.cameraButtonContainer}>
-                        <TouchableOpacity style={styles.cameraButton} onPress={() => { this.takePicture() }} />
+                        <Button style={styles.cameraButton} onPress={() => { this.takePicture() }} />
                     </View>
                 </View>
             </View>
@@ -45,24 +57,24 @@ const styles = Styles({
         justifyContent: 'center',
         backgroundColor: '#FC508B',
         borderTopWidth: 2,
-        borderTopColor: '#000',
+        borderTopColor: 'black',
         height: screenHeight / 2,
         width: screenWidth
     },
     cameraButtonContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         width: 80,
         height: 80,
         borderRadius: 100 / 2,
     },
     cameraButton: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         width: 70,
         height: 70,
         borderRadius: 100 / 2,
-        borderColor: '#000',
+        borderColor: 'black',
         borderWidth: 4
     },
 })

@@ -19,15 +19,16 @@ export default class CameraScreen extends React.Component {
         const { params = {} } = navigation.state
 
         return {
-            headerTitle: <Text style={{ color: '#fff', fontFamily: 'Avenir', fontWeight: '900', fontStyle: 'italic', fontSize: 20 }}>{CameraHeader.title}</Text>,
-            headerStyle: { backgroundColor: '#FC508B', height: 62, borderBottomColor: '#000', borderBottomWidth: 2 },
-            headerRight: <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.handleCloseCamera()}>
-                <Image
-                    style={{ flex: 1 }}
-                    resizeMode='contain'
-                    source={require('../assets/buttons/close-button.png')}
-                />
-            </TouchableOpacity>
+            headerTitle: <Text style={CameraHeader.headerTitleStyle}>{CameraHeader.title}</Text>,
+            headerStyle: CameraHeader.headerStyle,
+            headerRight: CameraHeader.headerRightButtonImage ? 
+                <TouchableOpacity style={{ height: 50, width: 50, padding: 8, marginRight: 5 }} onPress={() => params.handleCloseCamera()}>
+                    <Image
+                        style={{ flex: 1 }}
+                        resizeMode='contain'
+                        source={CameraHeader.headerRightButtonImage}
+                    />
+                </TouchableOpacity> : null
         }
     }
 
@@ -39,9 +40,6 @@ export default class CameraScreen extends React.Component {
         this.props.navigation.setParams({ handleCloseCamera: this._handleCloseCamera })
         const { status } = await Permissions.askAsync(Permissions.CAMERA)
         this.setState({ hasCameraPermission: status === 'granted' })
-        Font.loadAsync({
-            'Avenir': require('../assets/fonts/Avenir-HeavyOblique.otf'),
-        });
     }
 
     render() {
